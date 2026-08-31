@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor / tooling
+.vscode/
+.idea/
+
+# Source hero footage (73 MB). Kept locally only — the page ships
+# assets/parallax-herobg-video-web.mp4 (5.4 MB), encoded from this file:
+#   ffmpeg -t 30.6 -i parallax-herobg-video.mp4 -an \
+#     -vf "scale=1600:-2,fade=t=in:st=0:d=0.7,fade=t=out:st=29.8:d=0.8" \
+#     -c:v libx264 -preset slow -crf 27 -pix_fmt yuv420p \
+#     -movflags +faststart parallax-herobg-video-web.mp4
+assets/parallax-herobg-video.mp4

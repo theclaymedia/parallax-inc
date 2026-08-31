@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parallax Inc. — Microcontrollers, Robotics &amp; STEM Education, Made in the USA</title>
+<meta name="description" content="Parallax Inc. designs and manufactures Propeller multicore microcontrollers, robotics kits, sensors and classroom curriculum in Rocklin, California.">
+<link rel="icon" href="assets/Paralax-Logo-fill.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Parallax Inc. — homepage redesign
+   Brand palette sampled from the official Parallax logo
+   ============================================================ */
+:root{
+  --navy:#002539;
+  --navy-800:#013049;
+  --navy-700:#0a3c57;
+  --navy-600:#14506f;
+  --blue:#1d75b5;
+  --blue-bright:#2f97e0;
+  --blue-soft:#e8f2fa;
+  --ink:#0f1c25;
+  --body:#415764;
+  --line:#dde5ea;
+  --paper:#ffffff;
+  --paper-2:#f4f7f9;
+  --radius:14px;
+  --radius-lg:22px;
+  --shadow-sm:0 1px 2px rgba(0,37,57,.06), 0 6px 16px rgba(0,37,57,.06);
+  --shadow-md:0 12px 34px rgba(0,37,57,.12);
+  --shadow-lg:0 26px 60px rgba(0,37,57,.18);
+  --wrap:1240px;
+  --header-h:76px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  color:var(--body);
+  background:var(--paper);
+  font-size:16.5px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4,h5{font-family:'Space Grotesk','Inter',sans-serif;color:var(--ink);margin:0;line-height:1.14;letter-spacing:-.02em;font-weight:600}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+blockquote{margin:0}
+
+:focus-visible{outline:3px solid var(--blue-bright);outline-offset:3px;border-radius:4px}
+
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 24px}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:999;
+  background:var(--navy);color:#fff;padding:12px 20px;border-radius:0 0 8px 0;font-weight:600;
+}
+.skip:focus{left:0}
+
+/* ---------- Shared bits ---------- */
+.eyebrow{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.74rem;
+  font-weight:600;
+  letter-spacing:.20em;
+  text-transform:uppercase;
+  color:var(--blue);
+  margin-bottom:16px;
+}
+.eyebrow--light{color:#7dc3f2}
+
+.section{padding:104px 0}
+.section--alt{background:var(--paper-2)}
+
+.section-head{max-width:720px;margin-bottom:56px}
+.section-head--center{margin-left:auto;margin-right:auto;text-align:center}
+.section-head h2{font-size:clamp(2rem,3.6vw,2.9rem)}
+.section-head p{margin-top:18px;font-size:1.08rem}
+
+.split-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:52px;
+}
+.split-head h2{font-size:clamp(2rem,3.5vw,2.8rem);max-width:16ch;text-wrap:balance}
+.split-head p{margin-top:16px;max-width:46ch}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 28px;border-radius:999px;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.98rem;letter-spacing:.01em;
+  border:1.5px solid transparent;
+  transition:transform .25s var(--ease), background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 10px 26px rgba(29,117,181,.34)}
+.btn-primary:hover{background:var(--blue-bright);box-shadow:0 16px 34px rgba(29,117,181,.42)}
+.btn-ghost{border-color:rgba(255,255,255,.45);color:#fff}
+.btn-ghost:hover{background:#fff;color:var(--navy);border-color:#fff}
+.btn-outline{border-color:var(--line);color:var(--ink);background:#fff}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue)}
+.btn-sm{padding:11px 22px;font-size:.9rem}
+
+.link-arrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;color:var(--blue);
+}
+.link-arrow svg{transition:transform .25s var(--ease)}
+.link-arrow:hover svg{transform:translateX(5px)}
+
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;
+  font-size:.9rem;font-weight:600;font-family:'Space Grotesk',sans-serif;color:var(--navy);
+  transition:border-color .2s,color .2s,background .2s,transform .2s var(--ease);
+}
+.chip:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-soft);transform:translateY(-2px)}
+.chip-row{display:flex;flex-wrap:wrap;gap:11px}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.utility{position:relative;z-index:130;background:var(--navy);color:rgba(255,255,255,.72);font-size:.79rem}
+.utility .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:38px}
+.utility a{transition:color .2s}
+.utility a:hover{color:#fff}
+.utility-made{display:inline-flex;align-items:center;gap:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:.72rem;color:#fff}
+.flag{width:22px;height:14px;border-radius:2px;overflow:hidden;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.25)}
+.utility-right{display:flex;align-items:center;gap:20px}
+.utility-sep{width:1px;height:14px;background:rgba(255,255,255,.22)}
+
+.site-header{
+  position:sticky;top:0;z-index:120;
+  transition:background .3s var(--ease), box-shadow .3s var(--ease), backdrop-filter .3s var(--ease);
+}
+.site-header::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(0,20,32,.72),rgba(0,20,32,0));
+  opacity:1;transition:opacity .3s var(--ease);pointer-events:none;
+}
+.site-header.is-solid{background:rgba(0,37,57,.97);backdrop-filter:saturate(160%) blur(10px);box-shadow:0 1px 0 rgba(255,255,255,.08),0 10px 30px rgba(0,20,32,.28)}
+.site-header.is-solid::before{opacity:0}
+
+.header-inner{display:flex;align-items:center;gap:28px;min-height:var(--header-h)}
+.brand{flex:none;display:block;padding:6px 0}
+.brand img{height:34px;width:auto}
+
+.nav{margin-left:auto;display:flex;align-items:center;gap:2px}
+.nav-item{position:relative}
+.nav-link{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 14px;border-radius:8px;
+  font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:.95rem;color:#fff;
+  transition:background .2s var(--ease), color .2s var(--ease);
+  white-space:nowrap;
+}
+.nav-link:hover,.nav-item.is-open > .nav-link{background:rgba(255,255,255,.12)}
+.nav-link .chev{width:9px;height:9px;opacity:.7;transition:transform .25s var(--ease)}
+.nav-item.is-open .chev{transform:rotate(180deg)}
+
+.header-actions{display:flex;align-items:center;gap:10px;margin-left:8px}
+.icon-btn{
+  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;
+  transition:background .2s;position:relative;
+}
+.icon-btn:hover{background:rgba(255,255,255,.14)}
+.cart-count{
+  position:absolute;top:4px;right:3px;min-width:17px;height:17px;padding:0 4px;
+  background:var(--blue-bright);color:#fff;border-radius:999px;
+  font-size:.64rem;font-weight:700;display:grid;place-items:center;font-family:'Inter',sans-serif;
+}
+.nav-toggle{display:none}
+
+/* Mega menu */
+.mega{
+  position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(-8px);
+  background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);
+  padding:34px 34px 30px;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .22s var(--ease), transform .22s var(--ease), visibility .22s;
+  border:1px solid var(--line);
+}
+.nav-item.is-open .mega{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.mega::before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px}
+.mega-cols{display:grid;gap:30px 40px}
+.mega--4 .mega-cols{grid-template-columns:repeat(4,minmax(178px,1fr))}
+.mega--3 .mega-cols{grid-template-columns:repeat(3,minmax(200px,1fr))}
+.mega--1{padding:20px}
+.mega--1 .mega-cols{grid-template-columns:minmax(216px,1fr)}
+.mega-col-title{
+  font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--navy);
+  padding-bottom:11px;margin-bottom:11px;border-bottom:1px solid var(--line);
+  display:block;transition:color .2s;
+}
+a.mega-col-title:hover{color:var(--blue)}
+.mega-list li + li{margin-top:1px}
+.mega-list a{
+  display:block;padding:7px 10px;margin:0 -10px;border-radius:8px;
+  font-size:.92rem;color:var(--body);font-weight:500;line-height:1.4;
+  transition:background .18s,color .18s;
+}
+.mega-list a:hover{background:var(--blue-soft);color:var(--navy)}
+.mega-list .is-sub a{position:relative;padding-left:22px;font-size:.87rem;color:#68808e}
+.mega-list .is-sub a::before{content:"";position:absolute;left:10px;top:calc(50% - .75px);width:5px;height:1.5px;background:#b6c6cf}
+.mega-foot{
+  margin-top:26px;padding-top:20px;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+}
+.mega-foot span{font-size:.88rem}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  min-height:clamp(620px,94vh,980px);
+  margin-top:calc(-1 * var(--header-h));
+  padding-top:var(--header-h);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:#020e16;
+  text-align:center;
+}
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 42%;
+}
+.hero-scrim{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(88% 70% at 50% 48%, rgba(0,20,32,.20) 0%, rgba(0,15,25,.72) 100%),
+    linear-gradient(to bottom, rgba(0,20,32,.78) 0%, rgba(0,20,32,.34) 32%, rgba(0,20,32,.52) 66%, rgba(0,20,32,.92) 100%);
+}
+.hero-glow{
+  position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
+  width:min(1100px,120vw);height:min(720px,80vh);
+  background:radial-gradient(closest-side, rgba(29,117,181,.28), rgba(29,117,181,0) 72%);
+  pointer-events:none;
+}
+.hero-content{
+  position:relative;z-index:2;
+  width:100%;max-width:900px;margin:0 auto;padding:60px 24px 72px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+}
+.hero-content .eyebrow{margin-bottom:20px}
+.hero h1{
+  color:#fff;
+  font-size:clamp(2.7rem,7.2vw,5.1rem);
+  font-weight:700;letter-spacing:-.035em;line-height:1.02;
+  text-wrap:balance;
+}
+.hero h1 .accent{
+  background:linear-gradient(100deg,#5cb8f5,#1d75b5);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-sub{
+  margin-top:26px;max-width:640px;
+  color:rgba(233,243,250,.9);font-size:clamp(1.03rem,1.7vw,1.2rem);line-height:1.62;
+  text-wrap:pretty;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:38px}
+.hero-note{
+  margin-top:34px;
+  display:inline-flex;align-items:center;gap:10px;
+  color:rgba(214,232,244,.72);font-size:.83rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+}
+.hero-note .flag{box-shadow:0 0 0 1px rgba(255,255,255,.3)}
+
+/* ============================================================
+   PROOF BAND
+   ============================================================ */
+.proof{background:var(--navy);color:#fff;border-top:1px solid rgba(255,255,255,.08)}
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.proof-item{padding:44px 34px;border-left:1px solid rgba(255,255,255,.11)}
+.proof-item:first-child{border-left:0;padding-left:0}
+.proof-item:last-child{padding-right:0}
+.proof-figure{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(1.9rem,3vw,2.5rem);color:#fff;line-height:1;margin-bottom:12px;
+}
+.proof-figure em{font-style:normal;color:var(--blue-bright)}
+.proof-item p{color:rgba(206,227,242,.74);font-size:.93rem;line-height:1.5}
+
+/* ============================================================
+   PATHFINDER (tabbed)
+   ============================================================ */
+.path-shell{
+  display:grid;grid-template-columns:minmax(280px,.85fr) 1.15fr;gap:clamp(28px,4vw,56px);
+  align-items:start;
+}
+.path-tabs{display:flex;flex-direction:column;gap:10px}
+.path-tab{
+  position:relative;display:flex;align-items:flex-start;gap:16px;width:100%;
+  padding:22px 24px;border-radius:var(--radius-lg);border:1px solid var(--line);
+  background:#fff;text-align:left;
+  transition:border-color .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease),transform .25s var(--ease);
+}
+.path-tab:hover{border-color:#bcd8ec;transform:translateX(3px)}
+.path-tab[aria-selected="true"]{
+  background:var(--navy);border-color:var(--navy);box-shadow:var(--shadow-md);
+}
+.path-tab-num{
+  font-family:'Space Grotesk',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.1em;
+  color:var(--blue);padding-top:4px;flex:none;
+}
+.path-tab[aria-selected="true"] .path-tab-num{color:var(--blue-bright)}
+.path-tab h3{font-size:1.16rem;margin-bottom:5px;transition:color .25s}
+.path-tab span{font-size:.9rem;display:block;line-height:1.45}
+.path-tab[aria-selected="true"] h3{color:#fff}
+.path-tab[aria-selected="true"] span{color:rgba(206,227,242,.78)}
+
+.path-panel{
+  display:none;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:#fff;
+  box-shadow:var(--shadow-sm);
+}
+.path-panel.is-active{display:block;animation:panelIn .4s var(--ease)}
+@keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.path-panel-media{position:relative;background:var(--navy)}
+.path-panel-media img{width:100%;aspect-ratio:20/9;object-fit:cover;opacity:.94}
+.path-panel-media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,37,57,.55),rgba(0,37,57,0) 55%)}
+.path-panel-body{padding:32px 34px 34px}
+.path-panel-body h3{font-size:1.6rem;margin-bottom:14px}
+.path-panel-body > p{font-size:1.02rem;margin-bottom:24px}
+.path-links{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:2px 24px;
+  margin-bottom:28px;padding-top:22px;border-top:1px solid var(--line);
+}
+.path-links a{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:11px 0;font-size:.95rem;font-weight:500;color:var(--body);
+  border-bottom:1px solid var(--line);transition:color .2s,padding-left .2s var(--ease);
+}
+.path-links a:hover{color:var(--blue);padding-left:6px}
+.path-links svg{opacity:.4;flex:none}
+.path-links a:hover svg{opacity:1}
+
+/* ============================================================
+   BENTO
+   ============================================================ */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
+.tile{
+  position:relative;display:flex;flex-direction:column;overflow:hidden;
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);
+}
+.tile:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:#c6dcec}
+.tile-media{overflow:hidden;background:var(--paper-2);flex:none}
+.tile-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.tile:hover .tile-media img{transform:scale(1.045)}
+.tile-body{padding:28px 30px 30px;display:flex;flex-direction:column;flex:1}
+.tile-body h3{font-size:1.22rem;line-height:1.26;margin-bottom:11px;text-wrap:balance}
+.tile-body p{font-size:.94rem;margin-bottom:22px}
+.tile-body .chip-row{margin-bottom:20px}
+.tile-body .link-arrow{margin-top:auto;font-size:.9rem}
+
+.tile--dark{background:var(--navy);border-color:var(--navy-700);color:rgba(206,227,242,.78)}
+.tile--dark:hover{border-color:var(--navy-600)}
+.tile--dark h3{color:#fff}
+.tile--dark p{color:rgba(206,227,242,.78)}
+.tile--dark .eyebrow{color:#7dc3f2}
+.tile--dark .chip{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22);color:#fff}
+.tile--dark .chip:hover{background:#fff;color:var(--navy);border-color:#fff}
+.tile--dark .link-arrow{color:#7dc3f2}
+
+/* lead tile: media beside body */
+.tile--lead{grid-column:span 7;flex-direction:row}
+.tile--lead .tile-media{width:44%;flex:none}
+.tile--lead .tile-body{padding:36px 36px 34px;justify-content:center}
+.tile--lead .tile-body h3{font-size:1.75rem;margin-bottom:14px}
+.tile--lead .tile-body p{font-size:1rem}
+
+.tile--a{grid-column:span 5}
+.tile--a .tile-media img{aspect-ratio:16/9}
+.tile--b{grid-column:span 5}
+.tile--b .tile-media img{aspect-ratio:16/9}
+.tile--stat{grid-column:span 7;flex-direction:row}
+.tile--stat .tile-media{width:38%;flex:none}
+.tile--stat .tile-body{padding:38px 40px 36px;justify-content:center}
+.tile--third{grid-column:span 4}
+.tile--third .tile-media img{aspect-ratio:16/10}
+
+.stat-figure{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.04em;line-height:1;
+  font-size:clamp(3rem,6vw,4.4rem);color:#fff;margin-bottom:14px;
+}
+.stat-figure em{font-style:normal;color:var(--blue-bright)}
+
+/* ============================================================
+   USA BAND
+   ============================================================ */
+.usa{position:relative;overflow:hidden;background:var(--navy);color:#fff}
+.usa::after{
+  content:"";position:absolute;right:-8%;top:-30%;width:52%;height:160%;
+  background:radial-gradient(closest-side,rgba(29,117,181,.30),rgba(29,117,181,0) 70%);
+  pointer-events:none;
+}
+.usa-inner{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,80px);align-items:center;padding:100px 0;
+}
+.usa h2{color:#fff;font-size:clamp(1.9rem,3.4vw,2.7rem);margin-bottom:20px;text-wrap:balance}
+.usa p{color:rgba(219,235,246,.82);font-size:1.06rem}
+.usa .chip-row{margin-top:30px}
+.usa .chip{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.24);color:#fff}
+.usa .chip:hover{background:#fff;color:var(--navy);border-color:#fff}
+.usa-media img{border-radius:var(--radius-lg);aspect-ratio:5/4;object-fit:cover;box-shadow:0 30px 70px rgba(0,10,18,.5)}
+.usa-badge{
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;
+  color:#fff;font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.quote{
+  display:flex;flex-direction:column;
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);
+  padding:30px 30px 28px;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+}
+.quote:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:#c6dcec}
+.quote blockquote{
+  font-family:'Space Grotesk',sans-serif;color:var(--ink);font-size:1.03rem;line-height:1.5;
+  letter-spacing:-.01em;margin-bottom:24px;text-wrap:pretty;
+}
+.quote-cite{margin-top:auto;padding-top:20px;border-top:1px solid var(--line)}
+.quote-name{
+  display:block;font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--ink);
+  font-size:.97rem;margin-bottom:3px;
+}
+.quote-org{display:block;font-size:.86rem;line-height:1.45}
+
+.quote--lead{
+  grid-column:span 2;grid-row:span 2;
+  background:var(--navy);border-color:var(--navy);color:rgba(206,227,242,.8);
+  padding:44px 46px 40px;justify-content:center;
+}
+.quote--lead:hover{border-color:var(--navy-600)}
+.quote--lead .quote-mark{
+  font-family:'Space Grotesk',sans-serif;font-size:4.4rem;line-height:.7;color:var(--blue-bright);
+  margin-bottom:18px;display:block;
+}
+.quote--lead blockquote{
+  color:#fff;font-size:clamp(1.25rem,2.1vw,1.72rem);line-height:1.36;font-weight:500;margin-bottom:32px;
+}
+.quote--lead .quote-cite{border-top-color:rgba(255,255,255,.16)}
+.quote--lead .quote-name{color:#fff}
+.quote--lead .quote-org{color:rgba(206,227,242,.72)}
+
+.builton{margin-top:64px;padding-top:44px;border-top:1px solid var(--line)}
+.builton-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:24px;
+}
+.builton-head h3{font-size:1.2rem}
+.builton-list{display:flex;flex-wrap:wrap;gap:10px 12px}
+.builton-list a{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.02rem;color:#7d95a3;
+  letter-spacing:-.01em;padding:6px 0;transition:color .2s;
+}
+.builton-list a:hover{color:var(--navy)}
+.builton-list .dot{color:var(--line);user-select:none;padding:6px 0}
+
+/* ============================================================
+   ANNOUNCEMENTS (timeline)
+   ============================================================ */
+.news-shell{display:grid;grid-template-columns:minmax(240px,.65fr) 1.35fr;gap:clamp(32px,5vw,72px);align-items:start}
+.news-aside{position:sticky;top:calc(var(--header-h) + 28px)}
+.news-aside h2{font-size:clamp(2rem,3.4vw,2.7rem);margin-bottom:18px}
+.news-aside p{margin-bottom:28px}
+
+.news-lead{
+  display:grid;grid-template-columns:1fr;border:1px solid var(--line);border-radius:var(--radius-lg);
+  overflow:hidden;background:#fff;margin-bottom:8px;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+}
+.news-lead:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:#c6dcec}
+.news-lead img{width:100%;aspect-ratio:21/9;object-fit:cover}
+.news-lead .news-lead-body{padding:28px 30px 30px}
+.news-lead h3{font-size:1.42rem;line-height:1.24;margin-bottom:12px;text-wrap:balance}
+.news-lead p{font-size:.98rem;margin-bottom:20px}
+
+.news-date{
+  font-family:'Space Grotesk',sans-serif;font-size:.73rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--blue);
+}
+
+.news-list{margin-top:22px}
+.news-row{
+  display:grid;grid-template-columns:112px 1fr 132px;gap:24px;align-items:center;
+  padding:26px 0;border-top:1px solid var(--line);
+  transition:background .25s var(--ease);
+}
+.news-row:hover{background:linear-gradient(90deg,rgba(232,242,250,.7),rgba(232,242,250,0))}
+.news-row h3{font-size:1.08rem;line-height:1.32;margin-bottom:7px;text-wrap:balance;transition:color .2s}
+.news-row:hover h3{color:var(--blue)}
+.news-row p{font-size:.9rem;line-height:1.55}
+.news-row .news-thumb{width:132px;border-radius:12px;overflow:hidden;background:var(--paper-2)}
+.news-row .news-thumb img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .5s var(--ease)}
+.news-row:hover .news-thumb img{transform:scale(1.06)}
+
+/* ============================================================
+   CTA STRIP
+   ============================================================ */
+.cta-strip{background:linear-gradient(120deg,var(--navy) 0%,#063a58 55%,#0d5a86 100%);color:#fff}
+.cta-strip .wrap{padding-top:88px;padding-bottom:88px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.cta-strip h2{color:#fff;font-size:clamp(2rem,3.8vw,2.9rem);max-width:760px;text-wrap:balance}
+.cta-strip p{margin-top:20px;max-width:620px;color:rgba(219,235,246,.85);font-size:1.06rem}
+.cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:36px}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer{background:var(--navy);color:rgba(215,232,243,.72);font-size:.93rem}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:44px;padding:76px 0 60px}
+.footer-brand img{height:40px;margin-bottom:24px}
+.footer-address{font-style:normal;line-height:1.85}
+.footer-address a{color:#fff;font-weight:600}
+.footer-address a:hover{color:var(--blue-bright)}
+.footer-col h4{
+  color:#fff;font-family:'Space Grotesk',sans-serif;font-size:.76rem;font-weight:700;
+  letter-spacing:.17em;text-transform:uppercase;margin-bottom:20px;
+}
+.footer-col li + li{margin-top:11px}
+.footer-col a{transition:color .2s}
+.footer-col a:hover{color:#fff}
+.social{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.social a{
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(255,255,255,.08);color:#fff;transition:background .2s,transform .2s var(--ease);
+}
+.social a:hover{background:var(--blue);transform:translateY(-3px)}
+.social svg{width:17px;height:17px;fill:currentColor}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.12);padding:26px 0;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  font-size:.85rem;
+}
+.footer-made{display:inline-flex;align-items:center;gap:10px;color:#fff;font-weight:600}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1180px){
+  .mega--4 .mega-cols{grid-template-columns:repeat(2,minmax(170px,1fr))}
+  .tile--lead{grid-column:span 12}
+  .tile--a,.tile--b{grid-column:span 6}
+  .tile--stat{grid-column:span 12}
+  .tile--third{grid-column:span 6}
+}
+@media (max-width:1080px){
+  .nav{display:none}
+  .nav-toggle{display:grid}
+  .path-shell{grid-template-columns:1fr;gap:26px}
+  .news-shell{grid-template-columns:1fr;gap:36px}
+  .news-aside{position:static}
+  .quotes{grid-template-columns:repeat(2,1fr)}
+  .quote--lead{grid-column:span 2;grid-row:auto}
+}
+@media (max-width:900px){
+  .proof-grid{grid-template-columns:repeat(2,1fr)}
+  .proof-item{padding:32px 26px}
+  .proof-item:nth-child(odd){border-left:0;padding-left:0}
+  .proof-item:nth-child(even){padding-right:0}
+  .proof-item:nth-child(n+3){border-top:1px solid rgba(255,255,255,.11)}
+  .tile--lead,.tile--stat{flex-direction:column}
+  .tile--lead .tile-media,.tile--stat .tile-media{width:100%}
+  .tile--lead .tile-media img,.tile--stat .tile-media img{aspect-ratio:16/9}
+  .usa-inner{grid-template-columns:1fr;padding:76px 0}
+  .footer-top{grid-template-columns:1fr 1fr;gap:38px}
+  .utility .wrap{min-height:34px;font-size:.74rem}
+  .news-row{grid-template-columns:1fr 108px;gap:18px}
+  .news-row .news-date-cell{display:none}
+  .news-row .news-thumb{width:108px}
+  .path-links{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .section{padding:72px 0}
+  .proof-grid{grid-template-columns:1fr}
+  .proof-item{border-left:0;padding:26px 0}
+  .proof-item:nth-child(n+2){border-top:1px solid rgba(255,255,255,.11)}
+  .tile--a,.tile--b,.tile--third{grid-column:span 12}
+  .quotes{grid-template-columns:1fr}
+  .quote--lead{grid-column:span 1;padding:32px 28px 30px}
+  .footer-top{grid-template-columns:1fr;gap:34px;padding:56px 0 44px}
+  .utility-made span{display:none}
+  .hero{min-height:640px}
+  .hero-content{padding:48px 20px 60px}
+  .news-row{grid-template-columns:1fr;gap:14px}
+  .news-row .news-thumb{display:none}
+  .path-panel-body{padding:26px 24px 28px}
+}
+
+/* Mobile drawer */
+.drawer{position:fixed;inset:0;z-index:200;visibility:hidden}
+.drawer.is-open{visibility:visible}
+.drawer-scrim{
+  position:absolute;inset:0;background:rgba(0,20,32,.6);opacity:0;
+  transition:opacity .3s var(--ease);backdrop-filter:blur(2px);
+}
+.drawer.is-open .drawer-scrim{opacity:1}
+.drawer-panel{
+  position:absolute;top:0;right:0;height:100%;width:min(420px,90vw);
+  background:#fff;box-shadow:-20px 0 60px rgba(0,20,32,.3);
+  transform:translateX(100%);transition:transform .34s var(--ease);
+  display:flex;flex-direction:column;
+}
+.drawer.is-open .drawer-panel{transform:translateX(0)}
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 22px;border-bottom:1px solid var(--line);flex:none;
+}
+.drawer-head img{height:30px}
+.drawer-close{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--navy)}
+.drawer-close:hover{background:var(--paper-2)}
+.drawer-body{overflow-y:auto;padding:12px 12px 40px;flex:1}
+.acc-item{border-bottom:1px solid var(--line)}
+.acc-head{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:15px 12px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem;color:var(--navy);
+  text-align:left;
+}
+.acc-head .chev{width:11px;height:11px;transition:transform .25s var(--ease);flex:none;opacity:.6}
+.acc-item.is-open .acc-head .chev{transform:rotate(180deg)}
+.acc-panel{display:none;padding:0 12px 16px}
+.acc-item.is-open .acc-panel{display:block}
+.acc-panel .mega-col-title{margin-top:14px}
+.acc-panel .mega-list a{font-size:.93rem}
+.drawer-cta{padding:18px 22px 8px;display:flex;flex-direction:column;gap:10px}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}
+  .btn:hover,.tile:hover,.quote:hover,.chip:hover,.social a:hover,.path-tab:hover,.news-lead:hover{transform:none}
+}
+
+/* Reveal on scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ================= UTILITY BAR ================= -->
+<div class="utility">
+  <div class="wrap">
+    <a class="utility-made" href="https://www.parallax.com/made-in-the-usa/">
+      <span class="flag" aria-hidden="true">
+        <svg viewBox="0 0 22 14" width="22" height="14"><rect width="22" height="14" fill="#b22234"/><g fill="#fff"><rect y="1.08" width="22" height="1.08"/><rect y="3.23" width="22" height="1.08"/><rect y="5.38" width="22" height="1.08"/><rect y="7.54" width="22" height="1.08"/><rect y="9.69" width="22" height="1.08"/><rect y="11.85" width="22" height="1.08"/></g><rect width="9" height="7.54" fill="#3c3b6e"/></svg>
+      </span>
+      <span>Made in USA</span>
+    </a>
+    <div class="utility-right">
+      <a href="https://learn.parallax.com/">Tutorials</a>
+      <span class="utility-sep" aria-hidden="true"></span>
+      <a href="https://forums.parallax.com/">Forums</a>
+      <span class="utility-sep" aria-hidden="true"></span>
+      <a href="https://www.parallax.com/my-account/">My Account</a>
+      <span class="utility-sep" aria-hidden="true"></span>
+      <a href="https://www.parallax.com/log-in/">Log In</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="brand" href="https://www.parallax.com" aria-label="Parallax Inc. home">
+      <img src="assets/parallax-logo-knockout.png" alt="Parallax Inc." width="496" height="90">
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      <!-- PROPELLER -->
+      <div class="nav-item" data-nav>
+        <a class="nav-link" href="https://www.parallax.com/propeller/" aria-haspopup="true" aria-expanded="false">
+          Propeller
+          <svg class="chev" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="mega mega--4">
+          <div class="mega-cols">
+            <div>
+              <a class="mega-col-title" href="https://www.parallax.com/propeller/">Propeller</a>
+              <ul class="mega-list">
+                <li><a href="https://www.parallax.com/propeller-multicore-concept/">Propeller Multicore Concept</a></li>
+                <li><a href="https://www.parallax.com/propeller/customer-success/">Customer Success</a></li>
+              </ul>
+            </div>
+            <div>
+              <a class="mega-col-title" href="https://www.parallax.com/propeller-2/">Propeller 2</a>
+              <ul class="mega-list">
+                <li><a href="https://www.parallax.com/propeller-2/#p2-specs">Multicore Specs</a></li>
+                <li><a href="https://www.parallax.com/propeller-2/quick-bytes/">Quick Bytes</a></li>
+                <li><a href="https://www.parallax.com/propeller-2/object-exchange/">Object Exchange</a></li>
+                <li><a href="https://www.parallax.com/propeller-2/documentation/">Documentation</a></li>
+                <li><a href="https://www.parallax.com/propeller-2/hardware/">Hardware</a></li>
+                <li><a href="https://www.parallax.com/propeller-2/programming-tools/">Programming Tools (IDEs)</a></li>
+                <li><a href="https://www.parallax.com/propeller-2/social-media/">Social Media</a></li>
+              </ul>
+            </div>
+            <div>
+              <a class="mega-col-title" href="https://www.parallax.com/propeller-2/get-started/">Language Quick Start</a>
+              <ul class="mega-list">
+                <li><a href="https://www.parallax.com/propeller-2/get-started/spin2/">Spin2</a></li>
+                <li><a href="https://www.parallax.com/propeller-2/get-started/flex-c/">Flex C</a></li>
+                <li><a href="https://www.parallax.com/propeller-2/get-started/flexbasic/">FlexBASIC</a></li>
+                <li><a href="https://www.parallax.com/propeller-2/get-started/micropython/">Python</a></li>
+              </ul>
+            </div>
+            <div>
+              <a class="mega-col-title" href="https://www.parallax.com/propeller-1/">Propeller 1</a>
+              <ul class="mega-list">
+                <li><a href="https://www.parallax.com/propeller-1/object-exchange/">Object Exchange</a></li>
+                <li><a href="https://www.parallax.com/download/propeller-1-documentation/">Documentation</a></li>
+                <li><a href="https://www.parallax.com/propeller-1/hardware/">Hardware</a></li>
+                <li><a href="https://www.parallax.com/download/propeller-1-software/">Software</a></li>
+                <li><a href="https://www.parallax.com/propeller-1/open-source/">Open Source</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mega-foot">
+            <span>The P2X8C4M64P — eight 32-bit cores for commercial and educational applications.</span>
+            <a class="btn btn-primary btn-sm" href="https://www.parallax.com/propeller-2/">Check Out the Propeller 2</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="nav-item" data-nav>
+        <a class="nav-link" href="https://www.parallax.com/education/" aria-haspopup="true" aria-expanded="false">
+          Education
+          <svg class="chev" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="mega mega--4">
+          <div class="mega-cols">
+            <div>
+              <a class="mega-col-title" href="https://www.parallax.com/education/robotics/">Robotics</a>
+              <ul class="mega-list">
+                <li><a href="https://www.parallax.com/activitybot-360/">ActivityBot 360</a></li>
+                <li><a href="https://www.parallax.com/boe-bot-robot/">Boe-Bot Robot</a></li>
+                <li><a href="https://www.parallax.com/cyberbot/">Cyber:Bot</a></li>
+                <li><a href="https://www.parallax.com/shield-bot-for-arduino/">Shield-Bot for Arduino</a></li>
+                <li><a href="https://www.parallax.com/product-category/all-robotics/">All Robotics</a></li>
+              </ul>
+            </div>
+            <div>
+              <a class="mega-col-title" href="https://www.parallax.com/education/programming-languages/">Programming Languages</a>
+              <ul class="mega-list">
+                <li><a href="https://www.parallax.com/education/programming-languages/blocklyprop/">BlocklyProp</a></li>
+                <li><a href="https://www.parallax.com/education/programming-languages/propeller-c/">Propeller C</a></li>
+                <li><a href="https://www.parallax.com/education/programming-languages/arduino-c/">Arduino C</a></li>
+                <li><a href="https://www.parallax.com/education/programming-languages/python/">Python</a></li>
+                <li><a href="https://www.parallax.com/education/programming-languages/pbasic/">PBASIC</a></li>
+              </ul>
+            </div>
+            <div>
+              <a class="mega-col-title" href="https://www.parallax.com/education/educator-resources/">Educator Resources</a>
+              <ul class="mega-list">
+                <li><a href="https://www.parallax.com/professional-development/">Professional Development</a></li>
+                <li><a href="https://www.parallax.com/educator-hotline/">Educator Hotline</a></li>
+                <li><a href="https://www.parallax.com/funding-tips/">Funding Tips</a></li>
+                <li><a href="https://www.parallax.com/california-uc-csu-a-g-elective/">California UC/CSU A-G Elective</a></li>
+                <li><a href="https://www.parallax.com/standards-alignment/">Standards Alignment</a></li>
+                <li><a href="https://www.parallax.com/assessment-material/">Assessment Material</a></li>
+              </ul>
+            </div>
+            <div>
+              <a class="mega-col-title" href="https://www.parallax.com/education/">More in Education</a>
+              <ul class="mega-list">
+                <li><a href="https://www.parallax.com/education/featured-teachers/">Featured Teachers</a></li>
+                <li><a href="https://www.parallax.com/education/future-innovators-fund/">Future Innovators Fund</a></li>
+                <li><a href="https://learn.parallax.com/">Learn.Parallax.com Tutorials</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mega-foot">
+            <span>Tutorials, teacher resources, coding languages, robotics and projects.</span>
+            <a class="btn btn-primary btn-sm" href="https://www.parallax.com/education/">Get Started with Education</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUPPORT -->
+      <div class="nav-item" data-nav>
+        <a class="nav-link" href="https://www.parallax.com/support/" aria-haspopup="true" aria-expanded="false">
+          Support
+          <svg class="chev" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="mega mega--3">
+          <div class="mega-cols">
+            <div>
+              <a class="mega-col-title" href="https://www.parallax.com/support/">Support</a>
+              <ul class="mega-list">
+                <li><a href="https://www.parallax.com/submit-support-ticket/">Submit Support Ticket</a></li>
+                <li><a href="https://forums.parallax.com/">Forums</a></li>
+                <li><a href="https://www.parallax.com/educator-hotline/">Educator Hotline</a></li>
+                <li><a href="https://www.parallax.com/authorized-consultants/">Authorized Consultants</a></li>
+              </ul>
+            </div>
+            <div>
+              <a class="mega-col-title" href="https://www.parallax.com/download/">Downloads — Propeller</a>
+              <ul class="mega-list">
+                <li><a href="https://www.parallax.com/download/propeller-1-software/">Propeller 1 Software</a></li>
+                <li class="is-sub"><a href="https://www.parallax.com/download/propeller-1-software/">All Propeller 1 Software</a></li>
+                <li class="is-sub"><a href="https://www.parallax.com/download/propeller-c-software/">Propeller C Software</a></li>
+                <li class="is-sub"><a href="https://www.parallax.com/download/blocklyprop/">BlocklyProp</a></li>
+                <li><a href="https://www.parallax.com/download/propeller-1-documentation/">Propeller 1 Documentation</a></li>
+                <li><a href="https://www.parallax.com/propeller-2/programming-tools/">Propeller 2 Programming Tools (IDEs)</a></li>
+                <li><a href="https://www.parallax.com/propeller-2/documentation/">Propeller 2 Documentation</a></li>
+              </ul>
+            </div>
+            <div>
+              <a class="mega-col-title" href="https://www.parallax.com/download/">Downloads — More</a>
+              <ul class="mega-list">
+                <li><a href="https://www.parallax.com/download/basic-stamp-software/">BASIC Stamp Software</a></li>
+                <li><a href="https://www.parallax.com/download/basic-stamp-documentation/">BASIC Stamp Documentation</a></li>
+                <li><a href="https://www.parallax.com/download/elev-8-v3-downloads-software/">ELEV-8 V3 Downloads &amp; Software</a></li>
+                <li><a href="https://www.parallax.com/download/badge-downloads-software/">Badge Downloads &amp; Software</a></li>
+                <li><a href="https://www.parallax.com/download/arlo-downloads-software/">Arlo Downloads &amp; Software</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mega-foot">
+            <span>Educator Hotline, submit a ticket, forums and e-mail links to help you with your project.</span>
+            <a class="btn btn-primary btn-sm" href="https://www.parallax.com/support/">Support Resources</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHOP -->
+      <div class="nav-item">
+        <a class="nav-link" href="https://www.parallax.com/shop/">Shop</a>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="nav-item" data-nav>
+        <a class="nav-link" href="https://www.parallax.com/about-parallax/" aria-haspopup="true" aria-expanded="false">
+          About Parallax
+          <svg class="chev" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="mega mega--1">
+          <div class="mega-cols">
+            <ul class="mega-list">
+              <li><a href="https://www.parallax.com/our-story/">Our Story</a></li>
+              <li><a href="https://www.parallax.com/team/">Team</a></li>
+              <li><a href="https://www.parallax.com/about-parallax/employment/">Employment</a></li>
+              <li><a href="https://www.parallax.com/made-in-the-usa/">Made in the USA</a></li>
+              <li><a href="https://www.parallax.com/logos/">Logos</a></li>
+              <li><a href="https://www.parallax.com/sales/contact-sales/">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMMUNITY -->
+      <div class="nav-item" data-nav>
+        <a class="nav-link" href="https://www.parallax.com/community/" aria-haspopup="true" aria-expanded="false">
+          Community
+          <svg class="chev" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="mega mega--1">
+          <div class="mega-cols">
+            <ul class="mega-list">
+              <li><a href="https://www.parallax.com/news-blog/">News</a></li>
+              <li><a href="https://www.parallax.com/category/events/">Events</a></li>
+              <li><a href="https://forums.parallax.com">Forums</a></li>
+              <li><a href="https://www.parallax.com/community/#connect">Newsletter &amp; Social</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SALES -->
+      <div class="nav-item" data-nav>
+        <a class="nav-link" href="https://www.parallax.com/sales/" aria-haspopup="true" aria-expanded="false">
+          Sales
+          <svg class="chev" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="mega mega--1">
+          <div class="mega-cols">
+            <ul class="mega-list">
+              <li><a href="https://www.parallax.com/sales/contact-sales/">Contact Sales</a></li>
+              <li><a href="https://www.parallax.com/sales/distributors/">Distributors</a></li>
+              <li><a href="https://www.parallax.com/sales/policies/">Sales Policies</a></li>
+              <li><a href="https://www.parallax.com/sales/export-compliance/">Export Compliance</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-btn" href="https://www.parallax.com/shop/" aria-label="Cart, 0 items">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 7H6"/></svg>
+        <span class="cart-count">0</span>
+      </a>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg" aria-hidden="true" tabindex="-1">
+    <source src="assets/parallax-herobg-video-web.mp4" type="video/mp4">
+  </video>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <p class="eyebrow eyebrow--light">Featured Robot Kit</p>
+    <h1>cyber:bot <span class="accent">Robot Kit</span></h1>
+    <p class="hero-sub">Hands-on learning is the way to give your students some agency over their work and interest in technical careers!</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://www.parallax.com/product/cyberbot-robot-kit-with-microbit/">cyber:bot Robot Kit</a>
+      <a class="btn btn-ghost" href="https://learn.parallax.com/tutorials/grade/grades-9/cyberbot/">cyber:bot Curriculum</a>
+    </div>
+    <p class="hero-note">
+      <span class="flag" aria-hidden="true">
+        <svg viewBox="0 0 22 14" width="22" height="14"><rect width="22" height="14" fill="#b22234"/><g fill="#fff"><rect y="1.08" width="22" height="1.08"/><rect y="3.23" width="22" height="1.08"/><rect y="5.38" width="22" height="1.08"/><rect y="7.54" width="22" height="1.08"/><rect y="9.69" width="22" height="1.08"/><rect y="11.85" width="22" height="1.08"/></g><rect width="9" height="7.54" fill="#3c3b6e"/></svg>
+      </span>
+      Designed and made in Rocklin, California
+    </p>
+  </div>
+</section>
+
+<!-- ================= PROOF BAND ================= -->
+<section class="proof" aria-label="Parallax at a glance">
+  <div class="wrap">
+    <div class="proof-grid">
+      <div class="proof-item">
+        <p class="proof-figure"><em>8</em> cores</p>
+        <p>The P2X8C4M64P multicore microcontroller, running true parallel processing.</p>
+      </div>
+      <div class="proof-item">
+        <p class="proof-figure"><em>20,000</em></p>
+        <p>micro:bit modules in stock — no tariff markups, prices held for customers.</p>
+      </div>
+      <div class="proof-item">
+        <p class="proof-figure"><em>30+</em> years</p>
+        <p>Building BASIC Stamp 2 modules on our own manufacturing floor.</p>
+      </div>
+      <div class="proof-item">
+        <p class="proof-figure">Rocklin, <em>CA</em></p>
+        <p>Designed, assembled, tested and supported in the United States.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PATHFINDER ================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="split-head reveal">
+      <div>
+        <p class="eyebrow">Start Where You Are</p>
+        <h2>Three doors into Parallax</h2>
+        <p>Whether you are handing out kits on Monday morning or spec’ing a controller for production, the path starts here.</p>
+      </div>
+      <a class="btn btn-outline btn-sm" href="https://www.parallax.com/shop/">Browse the full shop</a>
+    </div>
+
+    <div class="path-shell reveal">
+      <div class="path-tabs" role="tablist" aria-label="Where to start">
+        <button class="path-tab" role="tab" id="tab-edu" aria-controls="panel-edu" aria-selected="true">
+          <span class="path-tab-num">01</span>
+          <span>
+            <h3>I teach</h3>
+            <span>Tutorials, teacher resources, coding languages, robotics and projects.</span>
+          </span>
+        </button>
+        <button class="path-tab" role="tab" id="tab-p2" aria-controls="panel-p2" aria-selected="false" tabindex="-1">
+          <span class="path-tab-num">02</span>
+          <span>
+            <h3>I build products</h3>
+            <span>Our new P2X8C4M64P is for commercial and educational applications.</span>
+          </span>
+        </button>
+        <button class="path-tab" role="tab" id="tab-sup" aria-controls="panel-sup" aria-selected="false" tabindex="-1">
+          <span class="path-tab-num">03</span>
+          <span>
+            <h3>I need a hand</h3>
+            <span>Educator Hotline, submit a ticket, forums and e-mail links to help you with your project.</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="path-panels">
+        <!-- EDUCATION PANEL -->
+        <div class="path-panel is-active" id="panel-edu" role="tabpanel" aria-labelledby="tab-edu">
+          <div class="path-panel-media">
+            <img src="assets/cyberbot-kit.jpg" alt="Students working with the cyber:bot robot kit" loading="lazy" width="768" height="576">
+          </div>
+          <div class="path-panel-body">
+            <h3>Get Started in Education</h3>
+            <p>Tutorials, teacher resources, coding languages, robotics and projects — every kit ships with free curriculum that has already been run in real classrooms.</p>
+            <div class="path-links">
+              <a href="https://www.parallax.com/education/robotics/">Robotics <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/education/programming-languages/">Programming Languages <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/education/educator-resources/">Educator Resources <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://learn.parallax.com/">Learn.Parallax.com Tutorials <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/education/future-innovators-fund/">Future Innovators Fund <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/education/featured-teachers/">Featured Teachers <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+            <a class="btn btn-primary btn-sm" href="https://www.parallax.com/education/">Get Started with Education</a>
+          </div>
+        </div>
+
+        <!-- PROPELLER 2 PANEL -->
+        <div class="path-panel" id="panel-p2" role="tabpanel" aria-labelledby="tab-p2" hidden>
+          <div class="path-panel-media">
+            <img src="assets/p2-chips.jpg" alt="Trays of Propeller 2 P2X8C4M64P multicore microcontrollers" loading="lazy" width="800" height="600">
+          </div>
+          <div class="path-panel-body">
+            <h3>Get Started with Propeller 2</h3>
+            <p>Our new P2X8C4M64P is for commercial and educational applications — eight 32-bit cores, no interrupts required, and a language for however you like to work.</p>
+            <div class="path-links">
+              <a href="https://www.parallax.com/propeller-2/#p2-specs">Multicore Specs <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/propeller-2/get-started/">Language Quick Start <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/propeller-2/hardware/">Hardware <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/propeller-2/programming-tools/">Programming Tools (IDEs) <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/propeller-2/object-exchange/">Object Exchange <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/propeller-2/documentation/">Documentation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+            <a class="btn btn-primary btn-sm" href="https://www.parallax.com/propeller-2/">Check Out the Propeller 2</a>
+          </div>
+        </div>
+
+        <!-- SUPPORT PANEL -->
+        <div class="path-panel" id="panel-sup" role="tabpanel" aria-labelledby="tab-sup" hidden>
+          <div class="path-panel-media">
+            <img src="assets/news-bs2.jpg" alt="BASIC Stamp 2 modules on the Parallax manufacturing floor in Rocklin, California" loading="lazy" width="300" height="225">
+          </div>
+          <div class="path-panel-body">
+            <h3>Support Resources</h3>
+            <p>Educator Hotline, submit a ticket, forums and e-mail links to help you with your project — answered by the same people who build the hardware.</p>
+            <div class="path-links">
+              <a href="https://www.parallax.com/submit-support-ticket/">Submit Support Ticket <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/educator-hotline/">Educator Hotline <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://forums.parallax.com/">Forums <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/download/">Downloads <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/authorized-consultants/">Authorized Consultants <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a href="https://www.parallax.com/sales/distributors/">Distributors <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+            <a class="btn btn-primary btn-sm" href="https://www.parallax.com/support/">Support Resources</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BENTO ================= -->
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="split-head reveal">
+      <div>
+        <p class="eyebrow">New from Parallax</p>
+        <h2>Hardware and curriculum, released together</h2>
+        <p>Every kit ships with free, classroom-tested tutorials — so the lesson is ready the day the box arrives.</p>
+      </div>
+      <a class="btn btn-outline btn-sm" href="https://www.parallax.com/news-blog/">See what’s new</a>
+    </div>
+
+    <div class="bento">
+      <!-- Mai-Z (lead) -->
+      <article class="tile tile--lead reveal">
+        <div class="tile-media">
+          <img src="assets/Mai-Z-mouse-bot.jpg" alt="Mai-Z the MouseBot, an elementary education robot built around the micro:bit module" loading="lazy" width="768" height="576">
+        </div>
+        <div class="tile-body">
+          <p class="eyebrow">Elementary Robotics</p>
+          <h3>Mai-Z the MouseBot</h3>
+          <p>Elementary education robot uses the micro:bit module – programmable screen-free with cards or using MakeCode. Includes complete, free curriculum!</p>
+          <div class="chip-row">
+            <a class="chip" href="https://www.parallax.com/product/mai-z-the-mousebot/">Mai-Z the MouseBot</a>
+            <a class="chip" href="https://www.parallax.com/product/screen-free-programming-pack-for-mai-z/">Screen-free Kit</a>
+          </div>
+          <a class="link-arrow" href="mailto:education@parallax.com">Request curriculum access
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Machine vision -->
+      <article class="tile tile--a reveal">
+        <a class="tile-media" href="https://www.parallax.com/product/huskylens-ai-add-on-kit-for-cyberbot-and-shield-bot/">
+          <img src="assets/machine-vision-and-ai-with-cyberbot-demonstration.jpg" alt="Machine vision and AI demonstration using the HuskyLens sensor on a cyber:bot robot" loading="lazy" width="768" height="432">
+        </a>
+        <div class="tile-body">
+          <p class="eyebrow">Machine Vision</p>
+          <h3>Machine vision and AI with cyber:bot</h3>
+          <p>Identify objects, colors, location while using machine vision and AI on the cyber:bot. The curriculum, hardware and future is ready for students!</p>
+          <div class="chip-row">
+            <a class="chip" href="https://www.parallax.com/product/huskylens-ai-add-on-kit-for-cyberbot-and-shield-bot/">HuskyLens Kit</a>
+            <a class="chip" href="https://learn.parallax.com/book_collection/ai-machine-learning-and-vision-w-the-cyberbot-and-makecode/">MakeCode Tutorials</a>
+            <a class="chip" href="https://learn.parallax.com/book_collection/ai-machine-learning-and-vision-w-the-cyberbot-and-python/">Python Tutorials</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- FLiP -->
+      <article class="tile tile--b reveal">
+        <a class="tile-media" href="https://www.parallax.com/product/propeller-flip-microcontroller-module/">
+          <img src="assets/FLiP-Multicore-Module-Rev-B.jpg" alt="FLiP Multicore Module Rev B, a Propeller-based microcontroller module" loading="lazy" width="550" height="410">
+        </a>
+        <div class="tile-body">
+          <p class="eyebrow">Product Development</p>
+          <h3>FLiP Multicore Module Rev B</h3>
+          <p>Wide improvements have been made to this popular module for product development, hobby and educational uses. The FLiP Proto Board Kit can be used for prototypes.</p>
+          <div class="chip-row">
+            <a class="chip" href="https://www.parallax.com/product/propeller-flip-microcontroller-module/">FLiP Rev. B</a>
+            <a class="chip" href="https://www.parallax.com/product/flip-protoboard-kit/">FLiP Proto Board Kit</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- micro:bit stock (dark stat tile) -->
+      <article class="tile tile--dark tile--stat reveal">
+        <a class="tile-media" href="https://www.parallax.com/product/microbit-v2-0-club-bundle/">
+          <img src="assets/microbit-modules.jpg" alt="micro:bit modules in stock at Parallax" loading="lazy" width="578" height="460">
+        </a>
+        <div class="tile-body">
+          <p class="eyebrow">Inventory</p>
+          <p class="stat-figure"><em>20,000</em> micro:bit modules</p>
+          <p>In stock at Parallax without any tariff markups. As the top American reseller of the micro:bit module, we’re keeping the inventory levels high and holding prices for our customers.</p>
+          <div class="chip-row">
+            <a class="chip" href="https://www.parallax.com/product/microbit-2-0-go-bundle/">micro:bit GO Kit</a>
+            <a class="chip" href="https://www.parallax.com/product/microbit-v2-0-club-bundle/">micro:bit CLUB Bundle</a>
+            <a class="chip" href="https://learn.parallax.com/tutorials/language/python-2/">Parallax micro:bit Tutorials</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Block coding -->
+      <article class="tile tile--third reveal">
+        <a class="tile-media" href="https://learn.parallax.com/tutorials/grade/grades-9/cyberbot/">
+          <img src="assets/MakeCode-sm-block-coding.jpg" alt="Microsoft MakeCode block programming for the cyber:bot robot" loading="lazy" width="650" height="468">
+        </a>
+        <div class="tile-body">
+          <p class="eyebrow">Block Coding</p>
+          <h3>Block coding for cyber:bot now available</h3>
+          <p>Students may now program the cyber:bot in Python or Microsoft MakeCode block programming — useful to introduce younger students or transition them to Python.</p>
+          <a class="link-arrow" href="https://learn.parallax.com/tutorials/grade/grades-9/cyberbot/">cyber:bot Block programming
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- Sensor tutorials -->
+      <article class="tile tile--third reveal">
+        <a class="tile-media" href="https://www.parallax.com/product/sensor-pack-for-the-microbit/">
+          <img src="assets/SensorPackage-for-microbot.jpg" alt="Sensor Pack for the micro:bit module" loading="lazy" width="768" height="567">
+        </a>
+        <div class="tile-body">
+          <p class="eyebrow">Sensors</p>
+          <h3>Sensor Python and MakeCode Tutorials released</h3>
+          <p>The tutorials demonstrate measurement of analog, pulse widths, high/low sensors for distance, environmental, human presence, and position.</p>
+          <div class="chip-row">
+            <a class="chip" href="https://learn.parallax.com/book_collection/sensors-with-the-microbit/">Python Tutorials</a>
+            <a class="chip" href="https://learn.parallax.com/book_collection/sensors-with-the-microbit-and-makecode/">MakeCode Tutorials</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- OBEX (dark) -->
+      <article class="tile tile--dark tile--third reveal">
+        <a class="tile-media" href="https://www.parallax.com/new-object-exchange-obex-for-propeller-1-and-2-multicore-microcontrollers-is-loaded-with-source-code/">
+          <img src="assets/obex.jpg" alt="The new Object Exchange (OBEX) source code library for Propeller multicore microcontrollers" loading="lazy" width="768" height="571">
+        </a>
+        <div class="tile-body">
+          <p class="eyebrow">Open Source</p>
+          <h3>New Object Exchange (OBEX)</h3>
+          <p>Popular Propeller source code files are in a single, searchable location. ADC, video, SPI, PWM and common interface examples are easy to find in the new OBEX.</p>
+          <a class="link-arrow" href="https://www.parallax.com/new-object-exchange-obex-for-propeller-1-and-2-multicore-microcontrollers-is-loaded-with-source-code/">Object Exchange Overview
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= USA BAND ================= -->
+<section class="usa">
+  <div class="wrap usa-inner">
+    <div class="reveal">
+      <p class="usa-badge">
+        <span class="flag" aria-hidden="true">
+          <svg viewBox="0 0 22 14" width="22" height="14"><rect width="22" height="14" fill="#b22234"/><g fill="#fff"><rect y="1.08" width="22" height="1.08"/><rect y="3.23" width="22" height="1.08"/><rect y="5.38" width="22" height="1.08"/><rect y="7.54" width="22" height="1.08"/><rect y="9.69" width="22" height="1.08"/><rect y="11.85" width="22" height="1.08"/></g><rect width="9" height="7.54" fill="#3c3b6e"/></svg>
+        </span>
+        Made in the USA
+      </p>
+      <h2>American-made at our facility in Rocklin, California</h2>
+      <p>We’ve made an important improvement to the Ping))) Ultrasonic Sensor and added serial I/O as an additional communication method. Made in Rocklin, California, we guarantee quality, support and longevity for our customers.</p>
+      <div class="chip-row">
+        <a class="chip" href="https://www.parallax.com/ping-ultrasonic-sensor-rev-e-released-with-serial-i-o/">Ping))) Ultrasonic Sensor Revision E</a>
+        <a class="chip" href="https://www.parallax.com/product/laserping-2m-rangefinder/">LaserPing Sensor</a>
+        <a class="chip" href="https://www.parallax.com/made-in-the-usa/">Made in the USA</a>
+      </div>
+    </div>
+    <div class="usa-media reveal">
+      <img src="assets/Ping-made-in-the-usa.jpg" alt="Ping))) Ultrasonic Sensor manufactured at the Parallax facility in Rocklin, California" loading="lazy" width="719" height="516">
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="split-head reveal">
+      <div>
+        <p class="eyebrow">From the Classroom</p>
+        <h2>What teachers say</h2>
+        <p>Educators from Trenton to Patras describe what changes when students program something they can pick up.</p>
+      </div>
+      <a class="btn btn-outline btn-sm" href="https://www.parallax.com/education/featured-teachers/">All Featured Teachers</a>
+    </div>
+
+    <div class="quotes">
+      <figure class="quote quote--lead reveal">
+        <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+        <blockquote>When I tell the students that their projects will be controlled by a single switch that is connected to a microcontroller, the students get really motivated. When they see their operating projects on display for the entire school to admire, that is a paradigm shift toward STEM careers.</blockquote>
+        <figcaption class="quote-cite">
+          <span class="quote-name">Bruce D. Williams</span>
+          <span class="quote-org">Hedgepeth-Williams Middle School of the Arts — Trenton, NJ</span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote reveal">
+        <blockquote>The look on their face when they program a robot, unplug it and it does what they want it to is priceless.</blockquote>
+        <figcaption class="quote-cite">
+          <span class="quote-name">Noelle McDaniel</span>
+          <span class="quote-org">DaVinci Academy of Arts and Sciences — Corning, CA</span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote reveal">
+        <blockquote>I am thoroughly a Parallax person. The technical support is outstanding.</blockquote>
+        <figcaption class="quote-cite">
+          <span class="quote-name">Cindy Clements</span>
+          <span class="quote-org">Trinidad State Junior College — Trinidad, CO</span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote reveal">
+        <blockquote>I really appreciate the BOE Shield-Bot. It’s a fantastic tool to quickly engage students into learning programming.</blockquote>
+        <figcaption class="quote-cite">
+          <span class="quote-name">Jeremy Karnowski</span>
+          <span class="quote-org">University of California San Diego — La Jolla, CA</span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote reveal">
+        <blockquote>Parallax’s high-quality products plus our creativity and hard work is a recipe that has always led to success!</blockquote>
+        <figcaption class="quote-cite">
+          <span class="quote-name">Nikos Giannakopoulos</span>
+          <span class="quote-org">3rd General Lyceum of Patras — Patras, Greece</span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote reveal">
+        <blockquote>Set up a makerspace with tools for fabricating prototypes. Let students learn programming without throwing answers at them.</blockquote>
+        <figcaption class="quote-cite">
+          <span class="quote-name">Mark Evans</span>
+          <span class="quote-org">Marian Catholic High School — Chicago Heights, IL</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="builton reveal">
+      <div class="builton-head">
+        <h3>Built on Propeller</h3>
+        <a class="link-arrow" href="https://www.parallax.com/propeller/customer-success/">Read the customer success stories
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="builton-list">
+        <a href="https://www.parallax.com/propeller/customer-success/">Benezan Electronics</a><span class="dot" aria-hidden="true">/</span>
+        <a href="https://www.parallax.com/propeller/customer-success/">Plural</a><span class="dot" aria-hidden="true">/</span>
+        <a href="https://www.parallax.com/propeller/customer-success/">JonyJib</a><span class="dot" aria-hidden="true">/</span>
+        <a href="https://www.parallax.com/propeller/customer-success/">SpecCNC</a><span class="dot" aria-hidden="true">/</span>
+        <a href="https://www.parallax.com/propeller/customer-success/">DEFCON</a><span class="dot" aria-hidden="true">/</span>
+        <a href="https://www.parallax.com/propeller/customer-success/">Henning Biomedical</a><span class="dot" aria-hidden="true">/</span>
+        <a href="https://www.parallax.com/propeller/customer-success/">DropCopter</a><span class="dot" aria-hidden="true">/</span>
+        <a href="https://www.parallax.com/propeller/customer-success/">Aquaai</a><span class="dot" aria-hidden="true">/</span>
+        <a href="https://www.parallax.com/propeller/customer-success/">HoverFly Technologies</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ANNOUNCEMENTS ================= -->
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="news-shell">
+      <div class="news-aside reveal">
+        <p class="eyebrow">From the Workshop</p>
+        <h2>Announcements</h2>
+        <p>Conference reports, shop-floor notes and classroom tips, written by the people who make the hardware.</p>
+        <a class="btn btn-outline btn-sm" href="https://www.parallax.com/news-blog/">View All Announcements</a>
+      </div>
+
+      <div class="news-main">
+        <article class="news-lead reveal">
+          <a href="https://www.parallax.com/parallax-summer-events-and-presentations-included-mai-z-mousebot-and-huskylens-ai-vision-sensor/">
+            <img src="assets/machine-vision-and-ai-with-cyberbot-demonstration.jpg" alt="" loading="lazy" width="768" height="432">
+          </a>
+          <div class="news-lead-body">
+            <p class="news-date">July 9, 2026</p>
+            <h3><a href="https://www.parallax.com/parallax-summer-events-and-presentations-included-mai-z-mousebot-and-huskylens-ai-vision-sensor/">Parallax Summer Events and Presentations Included Mai-Z MouseBot and HuskyLens AI Vision Sensor</a></h3>
+            <p>We attended several seasonal education conferences and introduced our new kits for the year: the Mai-Z MouseBot for elementary classrooms and the HuskyLens AI Vision sensor.</p>
+            <a class="link-arrow" href="https://www.parallax.com/parallax-summer-events-and-presentations-included-mai-z-mousebot-and-huskylens-ai-vision-sensor/">Read More
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <div class="news-list">
+          <article class="news-row reveal">
+            <div class="news-date-cell"><span class="news-date">May 13, 2026</span></div>
+            <div>
+              <h3><a href="https://www.parallax.com/first-mai-z-mousebot-shipped-and-received-by-customer/">First Mai-Z the MouseBot Boxing (and unboxing!)</a></h3>
+              <p>This wasn’t staged, but here’s our first Mai-Z the MouseBot shipment… and her arrival in Louisiana!</p>
+            </div>
+            <a class="news-thumb" href="https://www.parallax.com/first-mai-z-mousebot-shipped-and-received-by-customer/" tabindex="-1" aria-hidden="true">
+              <img src="assets/Mai-Z-mouse-bot.jpg" alt="" loading="lazy" width="768" height="576">
+            </a>
+          </article>
+
+          <article class="news-row reveal">
+            <div class="news-date-cell"><span class="news-date">May 13, 2026</span></div>
+            <div>
+              <h3><a href="https://www.parallax.com/mai-z-the-mousebot-line-following-tip/">Mai-Z the MouseBot Line Following Tip</a></h3>
+              <p>A popular classroom activity for Mai-Z the MouseBot is line following. My preference for creating the line is using a wide-tip permanent marker.</p>
+            </div>
+            <a class="news-thumb" href="https://www.parallax.com/mai-z-the-mousebot-line-following-tip/" tabindex="-1" aria-hidden="true">
+              <img src="assets/news-maiz-line.jpg" alt="" loading="lazy" width="300" height="225">
+            </a>
+          </article>
+
+          <article class="news-row reveal">
+            <div class="news-date-cell"><span class="news-date">April 23, 2026</span></div>
+            <div>
+              <h3><a href="https://www.parallax.com/building-basic-stamp-2-modules-for-30-years/">Building BASIC Stamp 2 Modules for 30+ Years</a></h3>
+              <p>As I walked through our manufacturing facility today, the oven door was open and we were baking a fresh batch of BASIC Stamp 2 modules.</p>
+            </div>
+            <a class="news-thumb" href="https://www.parallax.com/building-basic-stamp-2-modules-for-30-years/" tabindex="-1" aria-hidden="true">
+              <img src="assets/news-bs2.jpg" alt="" loading="lazy" width="300" height="225">
+            </a>
+          </article>
+
+          <article class="news-row reveal">
+            <div class="news-date-cell"><span class="news-date">April 21, 2026</span></div>
+            <div>
+              <h3><a href="https://www.parallax.com/microbit-live-california-no-script-video-clips-weekly-release/">micro:bit LIVE California No-script Video Clips Weekly Release</a></h3>
+              <p>The YouTube micro:bit LIVE California playlist includes over 45 videos — presentations and photos from micro:bit LIVE.</p>
+            </div>
+            <a class="news-thumb" href="https://www.parallax.com/microbit-live-california-no-script-video-clips-weekly-release/" tabindex="-1" aria-hidden="true">
+              <img src="assets/news-mbit-live.jpg" alt="" loading="lazy" width="300" height="148">
+            </a>
+          </article>
+
+          <article class="news-row reveal">
+            <div class="news-date-cell"><span class="news-date">April 15, 2026</span></div>
+            <div>
+              <h3><a href="https://www.parallax.com/solving-a-simple-maze-by-following-right-wall-using-a-ping/">Solving a Simple Maze by Following Right Wall Using a Ping)))</a></h3>
+              <p>Is the PING))) Ultrasonic Sensor and “Roaming with PING” Arduino code a good fit to program a Shield-Bot to pass through a maze?</p>
+            </div>
+            <a class="news-thumb" href="https://www.parallax.com/solving-a-simple-maze-by-following-right-wall-using-a-ping/" tabindex="-1" aria-hidden="true">
+              <img src="assets/news-ping-maze.png" alt="" loading="lazy" width="300" height="300">
+            </a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA STRIP ================= -->
+<section class="cta-strip">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--light">Talk to a Human</p>
+    <h2>Questions about a project, a purchase order or a classroom rollout?</h2>
+    <p>Educator Hotline, support tickets, forums and a sales team in Rocklin, California — reach whichever one fits.</p>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="https://www.parallax.com/sales/contact-sales/">Contact Sales</a>
+      <a class="btn btn-ghost" href="https://www.parallax.com/educator-hotline/">Educator Hotline</a>
+      <a class="btn btn-ghost" href="https://www.parallax.com/submit-support-ticket/">Submit Support Ticket</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/parallax-logo-knockout.png" alt="Parallax Inc." width="496" height="90">
+        <address class="footer-address">
+          Parallax Inc.<br>
+          599 Menlo Drive, Ste.100<br>
+          Rocklin, CA 95765 USA<br>
+          Phone <a href="tel:+19166248333">916-624-8333</a>
+        </address>
+        <div class="social">
+          <a href="http://www.facebook.com/ParallaxInc" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg></a>
+          <a href="http://www.twitter.com/parallaxinc" aria-label="Twitter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.82l4.71 6.23 5.46-6.23Zm-1.16 17.52h1.83L7.01 4.13H5.05l12.03 15.64Z"/></svg></a>
+          <a href="http://www.youtube.com/ParallaxInc" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.51a3.02 3.02 0 0 0-2.12-2.14C19.5 3.86 12 3.86 12 3.86s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.51C0 8.4 0 12 0 12s0 3.6.5 5.49a3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14C24 15.6 24 12 24 12s0-3.6-.5-5.49ZM9.6 15.57V8.43L15.82 12 9.6 15.57Z"/></svg></a>
+          <a href="https://www.instagram.com/parallaxinc" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85c.15-3.23 1.66-4.77 4.92-4.92C8.42 2.17 8.8 2.16 12 2.16ZM12 0C8.74 0 8.33.01 7.05.07 2.7.27.28 2.69.08 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg></a>
+          <a href="https://www.pinterest.com/parallaxinc" aria-label="Pinterest"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.16 9.42 7.63 11.17-.11-.95-.2-2.41.04-3.45.22-.94 1.4-5.96 1.4-5.96s-.36-.72-.36-1.78c0-1.67.97-2.92 2.17-2.92 1.02 0 1.52.77 1.52 1.69 0 1.03-.66 2.57-1 4-.28 1.2.6 2.17 1.78 2.17 2.14 0 3.78-2.25 3.78-5.5 0-2.88-2.07-4.89-5.02-4.89-3.42 0-5.43 2.56-5.43 5.21 0 1.03.4 2.14.9 2.74.1.12.11.22.08.34-.09.38-.3 1.2-.34 1.37-.05.22-.18.27-.41.16-1.53-.71-2.49-2.95-2.49-4.75 0-3.86 2.81-7.42 8.1-7.42 4.25 0 7.56 3.03 7.56 7.08 0 4.23-2.67 7.63-6.36 7.63-1.24 0-2.41-.65-2.81-1.41l-.77 2.92c-.28 1.07-1.03 2.4-1.53 3.22 1.15.35 2.37.55 3.64.55 6.63 0 12-5.37 12-12S18.63 0 12 0Z"/></svg></a>
+          <a href="https://www.linkedin.com/company/parallax" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="https://www.parallax.com/propeller/">Propeller</a></li>
+          <li><a href="https://www.parallax.com/education/">Education</a></li>
+          <li><a href="https://www.parallax.com/about-parallax/">About Parallax</a></li>
+          <li><a href="https://www.parallax.com/sales/policies/">Sales Policies</a></li>
+          <li><a href="https://www.parallax.com/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="https://www.parallax.com/sales/contact-sales/">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="https://www.parallax.com/product-category/propeller-2/">Propeller 2</a></li>
+          <li><a href="https://www.parallax.com/product-category/propeller-1/">Propeller 1</a></li>
+          <li><a href="https://www.parallax.com/product-category/all-robotics/">Robotics</a></li>
+          <li><a href="https://www.parallax.com/product-category/wireless/rfid/">RFID</a></li>
+          <li><a href="https://www.parallax.com/product-category/sensors/">Sensors</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="https://www.parallax.com/download/">Downloads</a></li>
+          <li><a href="https://forums.parallax.com/">Forums</a></li>
+          <li><a href="https://www.parallax.com/submit-support-ticket/">Support Ticket</a></li>
+          <li><a href="https://www.parallax.com/educator-hotline/">Educator Hotline</a></li>
+          <li><a href="https://www.parallax.com/community/#connect">Newsletter &amp; Social</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Copyright © 2024 Parallax Inc. All Rights Reserved</span>
+      <span class="footer-made">
+        <span class="flag" aria-hidden="true">
+          <svg viewBox="0 0 22 14" width="22" height="14"><rect width="22" height="14" fill="#b22234"/><g fill="#fff"><rect y="1.08" width="22" height="1.08"/><rect y="3.23" width="22" height="1.08"/><rect y="5.38" width="22" height="1.08"/><rect y="7.54" width="22" height="1.08"/><rect y="9.69" width="22" height="1.08"/><rect y="11.85" width="22" height="1.08"/></g><rect width="9" height="7.54" fill="#3c3b6e"/></svg>
+        </span>
+        Designed and Made in California, USA
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= MOBILE DRAWER ================= -->
+<div class="drawer" id="drawer">
+  <div class="drawer-scrim" data-drawer-close></div>
+  <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div class="drawer-head">
+      <img src="assets/Paralax-Logo-fill.png" alt="Parallax Inc.">
+      <button class="drawer-close" data-drawer-close aria-label="Close menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body" id="drawerBody"><!-- populated from the desktop nav --></div>
+    <div class="drawer-cta">
+      <a class="btn btn-primary btn-sm" href="https://www.parallax.com/shop/">Shop Parallax</a>
+      <a class="btn btn-outline btn-sm" href="https://www.parallax.com/log-in/">Log In</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---- Sticky header state ---- */
+  var header = document.getElementById('siteHeader');
+  var onScroll = function () {
+    header.classList.toggle('is-solid', window.scrollY > 40);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---- Desktop mega menus (hover + keyboard) ---- */
+  var items = Array.prototype.slice.call(document.querySelectorAll('.nav-item[data-nav]'));
+  var closeAll = function (except) {
+    items.forEach(function (it) {
+      if (it === except) return;
+      it.classList.remove('is-open');
+      var link = it.querySelector('.nav-link');
+      if (link) link.setAttribute('aria-expanded', 'false');
+    });
+  };
+  items.forEach(function (item) {
+    var link = item.querySelector('.nav-link');
+    var open = function () {
+      closeAll(item);
+      item.classList.add('is-open');
+      link.setAttribute('aria-expanded', 'true');
+      keepInViewport(item);
+    };
+    var close = function () {
+      item.classList.remove('is-open');
+      link.setAttribute('aria-expanded', 'false');
+    };
+    item.addEventListener('mouseenter', open);
+    item.addEventListener('mouseleave', close);
+    item.addEventListener('focusin', open);
+    item.addEventListener('focusout', function (e) {
+      if (!item.contains(e.relatedTarget)) close();
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeAll(null); closeDrawer(); }
+  });
+
+  /* Nudge wide panels so they never overflow the window */
+  function keepInViewport(item) {
+    var panel = item.querySelector('.mega');
+    if (!panel) return;
+    panel.style.transform = '';
+    var r = panel.getBoundingClientRect();
+    var pad = 16, shift = 0;
+    if (r.right > window.innerWidth - pad) shift = window.innerWidth - pad - r.right;
+    if (r.left + shift < pad) shift = pad - r.left;
+    if (shift) panel.style.transform = 'translateX(calc(-50% + ' + Math.round(shift) + 'px))';
+  }
+
+  /* ---- Pathfinder tabs ---- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.path-tab'));
+  function selectTab(tab, focus) {
+    tabs.forEach(function (t) {
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      panel.classList.toggle('is-active', on);
+      if (on) { panel.removeAttribute('hidden'); } else { panel.setAttribute('hidden', ''); }
+    });
+    if (focus) tab.focus();
+  }
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('click', function () { selectTab(tab, false); });
+    tab.addEventListener('keydown', function (e) {
+      var next = null;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (e.key === 'Home') next = tabs[0];
+      if (e.key === 'End') next = tabs[tabs.length - 1];
+      if (!next) return;
+      e.preventDefault();
+      selectTab(next, true);
+    });
+  });
+
+  /* ---- Build the mobile drawer from the desktop nav ---- */
+  var body = document.getElementById('drawerBody');
+  Array.prototype.forEach.call(document.querySelectorAll('.nav .nav-item'), function (item) {
+    var link = item.querySelector('.nav-link');
+    var mega = item.querySelector('.mega');
+    var wrap = document.createElement('div');
+    wrap.className = 'acc-item';
+
+    if (!mega) {
+      wrap.innerHTML = '<a class="acc-head" href="' + link.getAttribute('href') + '">' +
+        link.textContent.trim() + '</a>';
+      body.appendChild(wrap);
+      return;
+    }
+
+    var btn = document.createElement('button');
+    btn.className = 'acc-head';
+    btn.type = 'button';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = link.textContent.trim() +
+      '<svg class="chev" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    var panel = document.createElement('div');
+    panel.className = 'acc-panel';
+    panel.innerHTML = '<a class="mega-col-title" href="' + link.getAttribute('href') + '">Overview</a>' +
+      mega.querySelector('.mega-cols').innerHTML;
+
+    btn.addEventListener('click', function () {
+      var open = wrap.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    wrap.appendChild(btn);
+    wrap.appendChild(panel);
+    body.appendChild(wrap);
+  });
+
+  /* ---- Drawer open/close ---- */
+  var drawer = document.getElementById('drawer');
+  var toggle = document.getElementById('navToggle');
+  function openDrawer() {
+    drawer.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    if (!drawer.classList.contains('is-open')) return;
+    drawer.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  toggle.addEventListener('click', function () {
+    drawer.classList.contains('is-open') ? closeDrawer() : openDrawer();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-drawer-close]'), function (el) {
+    el.addEventListener('click', closeDrawer);
+  });
+
+  /* ---- Reveal on scroll ---- */
+  var reveals = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(reveals, function (el) { el.classList.add('is-in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    Array.prototype.forEach.call(reveals, function (el, i) {
+      el.style.transitionDelay = (Math.min(i % 4, 3) * 70) + 'ms';
+      io.observe(el);
+    });
+  }
+
+  /* ---- Respect reduced motion for the hero video ---- */
+  var video = document.querySelector('.hero-video');
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function syncMotion() {
+    if (!video) return;
+    if (mq.matches) { video.pause(); } else { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+  }
+  syncMotion();
+  mq.addEventListener ? mq.addEventListener('change', syncMotion) : mq.addListener(syncMotion);
+})();
+</script>
+</body>
+</html>
